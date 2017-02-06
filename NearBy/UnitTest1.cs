@@ -79,6 +79,14 @@ namespace NearBy
             var distance = 2;
             Assert.IsFalse(Kata.HasNearBy(numbers, distance));
         }
+
+        [TestMethod]
+        public void Test_numbers_9_5_6_4_9_4_4_9and_distance_is_3_should_return_true()
+        {
+            var numbers = new List<int> { 9, 5, 6, 4, 9, 4, 4, 9 };
+            var distance = 3;
+            Assert.IsTrue(Kata.HasNearBy(numbers, distance));
+        }
     }
 
     public static class Kata
@@ -89,7 +97,7 @@ namespace NearBy
             {
                 return false;
             }
-            
+
             var index = 0;
             var windowsSize = distance + 1;
             var size = numbers.Count > windowsSize ? windowsSize : numbers.Count;
