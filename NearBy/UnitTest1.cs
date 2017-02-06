@@ -26,6 +26,14 @@ namespace NearBy
 
             Assert.IsFalse(Kata.HasNearBy(numbers, distance));
         }
+
+        [TestMethod]
+        public void Test_distance_is_zero_should_return_false()
+        {
+            var numbers = new List<int> { 1, 2, 3, 1, 2 };
+            var distance = 0;
+            Assert.IsFalse(Kata.HasNearBy(numbers, distance));
+        }
     }
 
     public static class Kata
