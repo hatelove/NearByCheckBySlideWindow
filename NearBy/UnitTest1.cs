@@ -94,14 +94,7 @@ namespace NearBy
             while (index + windowsSize <= numbers.Count)
             {
                 var listOfWindow = numbers.GetRange(0, windowsSize);
-                var hashSet = new HashSet<int>();
-                foreach (var i in listOfWindow)
-                {
-                    if (!hashSet.Add(i))
-                    {
-                        return true;
-                    }
-                }
+                if (HasDuplicate(listOfWindow)) return true;
 
                 index++;
             }
