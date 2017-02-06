@@ -116,15 +116,15 @@ namespace NearBy
                 if (HasDuplicate(listOfWindow)) return true;
 
                 index++;
-            } while (index + windowsSize <= numbers.Count);
+            } while (index + size <= numbers.Count);
 
             return false;
         }
 
-        private static bool HasDuplicate(List<int> numbers)
+        private static bool HasDuplicate(List<int> listOfWindow)
         {
             var hashSet = new HashSet<int>();
-            foreach (var i in numbers)
+            foreach (var i in listOfWindow)
             {
                 if (!hashSet.Add(i))
                 {
