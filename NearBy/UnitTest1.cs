@@ -89,21 +89,18 @@ namespace NearBy
             {
                 return false;
             }
-
-            var windowsSize = distance + 1;
+            
             var index = 0;
-            if (index + windowsSize > numbers.Count)
-            {
-                if (HasDuplicate(numbers)) return true;
-            }
+            var windowsSize = distance + 1;
+            var size = numbers.Count > windowsSize ? windowsSize : numbers.Count;
 
-            while (index + windowsSize <= numbers.Count)
+            do
             {
-                var listOfWindow = numbers.GetRange(index, windowsSize);
+                var listOfWindow = numbers.GetRange(index, size);
                 if (HasDuplicate(listOfWindow)) return true;
 
                 index++;
-            }
+            } while (index + windowsSize <= numbers.Count);
 
             return false;
         }
