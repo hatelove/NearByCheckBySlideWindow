@@ -50,6 +50,8 @@ namespace NearBy
             var distance = 2;
             Assert.IsFalse(Kata.HasNearBy(numbers,distance));
         }
+
+
     }
 
     public static class Kata
@@ -61,7 +63,18 @@ namespace NearBy
                 return false;
             }
 
-            throw new NotImplementedException();
+            var windowsSize = distance;
+            var listOfWindow = numbers.GetRange(0, distance);
+            var hashSet = new HashSet<int>();
+            foreach (var i in listOfWindow)
+            {
+                if (!hashSet.Add(i))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
