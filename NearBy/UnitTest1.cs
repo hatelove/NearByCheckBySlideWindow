@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
 namespace NearBy
@@ -41,6 +42,14 @@ namespace NearBy
             var distance = 1;
             Assert.IsFalse(Kata.HasNearBy(numbers, distance));
         }
+
+        [TestMethod]
+        public void Test_numbers_length_is_equals_distance_different_element_should_return_false()
+        {
+            var numbers = new List<int> {1, 2};
+            var distance = 2;
+            Assert.IsFalse(Kata.HasNearBy(numbers,distance));
+        }
     }
 
     public static class Kata
@@ -52,7 +61,7 @@ namespace NearBy
                 return false;
             }
 
-            return false;
+            throw new NotImplementedException();
         }
     }
 }
