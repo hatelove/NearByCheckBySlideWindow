@@ -73,6 +73,14 @@ namespace NearBy
             var distance = 2;
             Assert.IsTrue(Kata.HasNearBy(numbers, distance));
         }
+
+        [TestMethod]
+        public void Test_numbers_9_5_6_9_and_distance_is_2_should_return_false()
+        {
+            var numbers = new List<int> { 9, 5, 6, 9 };
+            var distance = 2;
+            Assert.IsFalse(Kata.HasNearBy(numbers, distance));
+        }
     }
 
     public static class Kata
@@ -93,7 +101,7 @@ namespace NearBy
 
             while (index + windowsSize <= numbers.Count)
             {
-                var listOfWindow = numbers.GetRange(0, windowsSize);
+                var listOfWindow = numbers.GetRange(index, windowsSize);
                 if (HasDuplicate(listOfWindow)) return true;
 
                 index++;
