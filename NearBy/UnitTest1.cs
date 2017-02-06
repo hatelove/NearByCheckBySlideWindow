@@ -6,9 +6,8 @@ namespace NearBy
     [TestClass]
     public class UnitTest1
     {
-        [Ignore]
         [TestMethod]
-        public void TestMethod1()
+        public void Test_numbers_1_2_3_2_1_and_distance_is_2_should_return_true()
         {
             var numbers = new List<int> { 1, 2, 3, 2, 1 };
             var distance = 2;
