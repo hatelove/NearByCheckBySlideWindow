@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
 namespace NearBy
@@ -46,12 +45,34 @@ namespace NearBy
         [TestMethod]
         public void Test_numbers_length_is_equals_distance_different_element_should_return_false()
         {
-            var numbers = new List<int> {1, 2};
+            var numbers = new List<int> { 1, 2 };
             var distance = 2;
-            Assert.IsFalse(Kata.HasNearBy(numbers,distance));
+            Assert.IsFalse(Kata.HasNearBy(numbers, distance));
         }
 
+        [TestMethod]
+        public void Test_numbers_1_1_and_distance_2_should_return_true()
+        {
+            var numbers = new List<int> { 1, 1 };
+            var distance = 2;
+            Assert.IsTrue(Kata.HasNearBy(numbers, distance));
+        }
 
+        [TestMethod]
+        public void Test_numbers_9_5_9_and_distance_is_3_should_return_true()
+        {
+            var numbers = new List<int> { 9, 5, 9 };
+            var distance = 3;
+            Assert.IsTrue(Kata.HasNearBy(numbers, distance));
+        }
+
+        [TestMethod]
+        public void Test_numbers_9_5_9_and_distance_is_2_should_return_true()
+        {
+            var numbers = new List<int> { 9, 5, 9 };
+            var distance = 2;
+            Assert.IsTrue(Kata.HasNearBy(numbers, distance));
+        }
     }
 
     public static class Kata
@@ -63,17 +84,41 @@ namespace NearBy
                 return false;
             }
 
-            var windowsSize = distance;
-            var listOfWindow = numbers.GetRange(0, distance);
+            var windowsSize = distance + 1;
+            var index = 0;
+            if (index + windowsSize > numbers.Count)
+            {
+                if (HasDuplicate(numbers)) return true;
+            }
+
+            while (index + windowsSize <= numbers.Count)
+            {
+                var listOfWindow = numbers.GetRange(0, windowsSize);
+                var hashSet = new HashSet<int>();
+                foreach (var i in listOfWindow)
+                {
+                    if (!hashSet.Add(i))
+                    {
+                        return true;
+                    }
+                }
+
+                index++;
+            }
+
+            return false;
+        }
+
+        private static bool HasDuplicate(List<int> numbers)
+        {
             var hashSet = new HashSet<int>();
-            foreach (var i in listOfWindow)
+            foreach (var i in numbers)
             {
                 if (!hashSet.Add(i))
                 {
                     return true;
                 }
             }
-
             return false;
         }
     }
