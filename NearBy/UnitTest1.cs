@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace NearBy
 {
@@ -100,52 +99,21 @@ namespace NearBy
 
     public static class Kata
     {
-        public static bool HasNearBy(int[] numbers, int distance)
+        public static bool HasNearBy(int[] nums, int k)
         {
-            if (distance == 0 || numbers.Length < 2 || IsUnique(numbers))
+            if (k == 0)
             {
                 return false;
             }
 
-            var index = 0;
-            var windowsSize = distance + 1;
-            var size = numbers.Length > windowsSize ? windowsSize : numbers.Length;
-
-            do
+            var set = new HashSet<int>();
+            for (int i = 0; i < nums.Length; i++)
             {
-                var listOfWindow = numbers.Skip(index).Take(size);
-                if (HasDuplicate(listOfWindow)) return true;
+                if (!set.Add(nums[i])) return true;
 
-                index++;
-            } while (index + size <= numbers.Length);
-
-            return false;
-        }
-
-        private static bool IsUnique(int[] numbers)
-        {
-            var hashSet = new HashSet<int>();
-            foreach (var number in numbers)
-            {
-                if (!hashSet.Add(number))
-                {
-                    return false;
-                }
+                if (i >= k) set.Remove(nums[i - k]);
             }
 
-            return true;
-        }
-
-        private static bool HasDuplicate(IEnumerable<int> listOfWindow)
-        {
-            var hashSet = new HashSet<int>();
-            foreach (var i in listOfWindow)
-            {
-                if (!hashSet.Add(i))
-                {
-                    return true;
-                }
-            }
             return false;
         }
     }
