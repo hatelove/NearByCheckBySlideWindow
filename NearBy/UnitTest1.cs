@@ -102,7 +102,7 @@ namespace NearBy
     {
         public static bool HasNearBy(int[] numbers, int distance)
         {
-            if (distance == 0 || numbers.Length < 2 || numbers.Distinct().Count() == numbers.Length)
+            if (distance == 0 || numbers.Length < 2 || IsUnique(numbers))
             {
                 return false;
             }
@@ -120,6 +120,20 @@ namespace NearBy
             } while (index + size <= numbers.Length);
 
             return false;
+        }
+
+        private static bool IsUnique(int[] numbers)
+        {
+            var hashSet = new HashSet<int>();
+            foreach (var number in numbers)
+            {
+                if (!hashSet.Add(number))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private static bool HasDuplicate(IEnumerable<int> listOfWindow)
