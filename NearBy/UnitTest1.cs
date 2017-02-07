@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NearBy
 {
@@ -95,6 +96,14 @@ namespace NearBy
             var distance = 99;
             Assert.IsTrue(Kata.HasNearBy(numbers, distance));
         }
+
+        [TestMethod]
+        public void Test_Long_array()
+        {
+            var numbers = Enumerable.Range(-3000, 5000).ToArray();
+            var distance = 100;
+            Assert.IsFalse(Kata.HasNearBy(numbers, distance));
+        }
     }
 
     public static class Kata
@@ -111,6 +120,7 @@ namespace NearBy
             {
                 if (!set.Add(nums[i])) return true;
 
+                //hashset 只保留目前 window 的內容
                 if (i >= k) set.Remove(nums[i - k]);
             }
 
